@@ -1,7 +1,7 @@
 // import Head from 'next/head';
 // import Image from 'next/image';
 import { useAuth } from '../lib/auth';
-import LoginButtons from '../components/loginButtons';
+import LoginButtons from '../components/LoginButtons';
 import { Vercel, Firebase, Nextjs, React, Tailwind } from '../icons/brands';
 
 export default function Home() {
@@ -14,7 +14,7 @@ export default function Home() {
           <h1 className="font-Rubik font-bold	text-4xl leading-normal">
             Commenting system for your
             <span className="inline-block underline decoration-LightNavyVliot decoration-solid decoration-8 underline-offset-4 ml-2">
-            Static Site
+              Static Site
             </span>
           </h1>
           <p className="text-GrayishBlue font-medium my-2">
