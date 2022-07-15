@@ -4,6 +4,22 @@ module.exports = {
     './components/**/*.{js,ts,jsx,tsx}',
   ],
   theme: {
+    maxWidth: {
+      btn: '250px',
+    },
+    screens: {
+      sm: '640px',
+      // => @media (min-width: 640px) { ... }
+
+      md: '768px',
+      // => @media (min-width: 768px) { ... }
+
+      lg: { max: '880px' },
+      // => @media (min-width: 1024px) { ... }
+
+      xl: '1245px',
+      // => @media (min-width: 1280px) { ... }
+    },
     extend: {
       fontFamily: {
         Rubik: 'Rubik',

@@ -4,9 +4,9 @@ import { Github, Google } from '../icons/brands';
 const LoginButtons = () => {
   const auth = useAuth();
   return (
-    <div className="flex justify-between a py-3 w-2/3 ">
+    <div className="flex flex-col justify-between w-5/6 max-w-md  xl:flex-row">
       <button
-        className="bg-Black text-White p-2 rounded-lg shadow-lg"
+        className="bg-Black text-White p-2 rounded-lg shadow-lg max-w-btn my-2"
         onClick={(e) => {
           auth.signinWithGitHub();
         }}
@@ -15,7 +15,7 @@ const LoginButtons = () => {
         Continue with GitHub
       </button>
       <button
-        className="bg-White text-Black p-2 rounded-lg shadow-lg"
+        className="bg-White text-Black p-2 rounded-lg shadow-lg max-w-btn my-2"
         onClick={(e) => {
           auth.signinWithGoogle();
         }}
