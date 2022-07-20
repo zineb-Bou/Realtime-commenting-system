@@ -2,7 +2,7 @@ import LoginButtons from './LoginButtons';
 import { Vercel, Firebase, Nextjs, React, Tailwind } from '../icons/brands';
 import { useAuth } from '../lib/auth';
 import Avatar from './Avatar';
-import SignoutModel from './signoutModel';
+import SignoutModel from './signOutModel';
 import { useState, useEffect } from 'react';
 
 export default function Header() {
