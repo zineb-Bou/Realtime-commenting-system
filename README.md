@@ -14,5 +14,9 @@ so we can remove comments that are not necessar.
 
 
 
+<<<<<<< HEAD
 
 Custom built solutions provide more control of the design, functionality and data than drop-in solutions, such as Disqus and Facebook Comments.
+=======
+I decided to build my own comments system. Firebase seemed like a perfect hosting alternative to running a back-end server.
+>>>>>>> 8218406f87fc48124517cedf9918c39764b82ca4
