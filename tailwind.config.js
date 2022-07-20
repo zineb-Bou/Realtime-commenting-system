@@ -21,6 +21,9 @@ module.exports = {
       // => @media (min-width: 1280px) { ... }
     },
     extend: {
+      spacing: {
+        14: '62px',
+      },
       fontFamily: {
         Rubik: 'Rubik',
       },
@@ -36,6 +39,9 @@ module.exports = {
         White: 'hsl(0, 0%, 100%)',
         Black: 'hsl(0, 0%, 0%)',
         LightNavyVliot: 'hsl(238.6,56.8%,85.5%)',
+        LavenderBlue: 'hsl(239, 57%, 85%)',
+        HanBlue: 'hsl(229, 57%, 61%)',
+        Liberty: 'hsl(237, 40%, 52%)',
       },
       textUnderlineOffset: {
         4: '-4px',

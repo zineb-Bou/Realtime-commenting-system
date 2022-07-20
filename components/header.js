@@ -1,10 +1,26 @@
 import LoginButtons from './LoginButtons';
 import { Vercel, Firebase, Nextjs, React, Tailwind } from '../icons/brands';
 import { useAuth } from '../lib/auth';
-import Image from 'next/image';
+import Avatar from './Avatar';
+import SignoutModel from './signoutModel';
+import { useState, useEffect } from 'react';
 
 export default function Header() {
   const auth = useAuth();
+  const [showModel, setShow] = useState(false);
+
+  const onMouseEnter = () => {
+    setShow(true);
+  };
+
+  const onMouseLeave = () => {
+    setShow(false);
+  };
+
+  useEffect(() => {
+    setShow(false);
+  }, [auth]);
+
   return (
     <header className="grid grid-rows-[60px_auto] gap-0 pb-2 bg-White before:content-[''] before:absolute before:top-0 before:inline-block before:bg-LightNavyVliot before:h-2 before:w-full ">
       <div className="w-2/5  lg:w-5/6 justify-self-center row-start-2 row-end-3 ">
@@ -31,15 +47,13 @@ export default function Header() {
         </div>
       </div>
       {auth.user ? (
-        <div className="flex items-center place-self-end mr-2  ">
-          <p className="text-bold mx-2 font-bold">{auth.user.name}</p>
-          <Image
-            className="rounded-full "
-            src={auth.user.photoURL}
-            alt="Profile Picture"
-            width={40}
-            height={40}
-          />
+        <div
+          className="flex items-center place-self-end mr-2 px-4 pb-2 cursor-pointer"
+          onMouseEnter={onMouseEnter}
+          onMouseLeave={onMouseLeave}
+        >
+          <Avatar src={auth.user.photoURL} />
+          {showModel ? <SignoutModel /> : ''}
         </div>
       ) : (
         ''

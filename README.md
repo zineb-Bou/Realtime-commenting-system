@@ -11,3 +11,8 @@ which periodically regenarates the static page in the packground. This
 
 one of the things that we take into a consideration before building any commenting system in the spam comment, to enforce no spam  people here will login with there github or gmail. so there is a name put there plus, in the back side you will have moderation 
 so we can remove comments that are not necessar.
+
+
+
+
+Custom built solutions provide more control of the design, functionality and data than drop-in solutions, such as Disqus and Facebook Comments.
