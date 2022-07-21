@@ -2,10 +2,14 @@ import { useForm } from 'react-hook-form';
 import { useAuth } from '../lib/auth';
 import Avatar from './Avatar';
 import { addComment } from '../lib/firestore';
+import { mutate } from 'swr';
+import { useState } from 'react';
 
 export default function CommentForm() {
   const auth = useAuth();
   const { register, handleSubmit, watch, reset } = useForm();
+
+  const [reply, setReply] = useState(false); // This state will manage the reply form
 
   const onSubmit = (data) => {
     addComment({
@@ -17,7 +21,13 @@ export default function CommentForm() {
     });
     reset();
   };
-
+  // mutate(
+  //   ['/api/comments', auth.user.token],
+  //   async (data) => ({
+  //     sites: [{ id, ...newSite }, ...data.sites],
+  //   }),
+  //   false
+  // );
   return (
     <form
       className="flex flex-row w-full gap-4 pw-12 py-8 px-4 bg-white rounded-lg items-start justify-center"
