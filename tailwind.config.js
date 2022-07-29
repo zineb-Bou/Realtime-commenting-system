@@ -46,6 +46,7 @@ module.exports = {
         LavenderBlue: 'hsl(239, 57%, 85%)',
         HanBlue: 'hsl(229, 57%, 61%)',
         Liberty: 'hsl(237, 40%, 52%)',
+        SlateGray: 'hsl(216, 15%, 52%)',
       },
       textUnderlineOffset: {
         4: '-4px',

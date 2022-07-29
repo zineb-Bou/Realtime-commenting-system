@@ -6,6 +6,7 @@ import { useState } from 'react';
 import { useAuth } from '../lib/auth';
 import EditBtn from './editBtn';
 import DeleteBtn from './deleteBtn';
+import getDate from '../utils/timeStamp';
 
 export default function Comment({
   key,
@@ -14,9 +15,10 @@ export default function Comment({
   photoURL,
   replies,
   userUid,
+  upvotes,
+  date,
 }) {
   const auth = useAuth();
-  console.log(auth);
   const [isReplying, setReply] = useState(false); // This state will manage the reply form
   const CommentForm = dynamic(() => import('./CommentForm')); // No need to import this component if the user won't click on "Reply"
 
@@ -26,10 +28,11 @@ export default function Comment({
         key={key}
         className="pw-12  grid h-max w-full grid-cols-[auto_minmax(0,1fr)_auto] grid-rows-[auto_1fr] gap-5 rounded-lg bg-white py-6 px-4"
       >
-        <Upvote />
-        <div className="flex items-center  ">
+        <Upvote upvotes={upvotes} />
+        <div className="flex items-center gap-x-2  ">
           <Avatar src={photoURL} />
-          <p className="mx-2 font-bold text-DarkBlue">{userName}</p>
+          <p className="text-sm font-bold text-DarkBlue">{userName}</p>
+          <p className="text-sm font-semibold text-SlateGray">{date}</p>
         </div>
         <p className="col-start-2 col-end-3 row-start-2 row-end-3 ">
           {commentText}
@@ -59,6 +62,8 @@ export default function Comment({
               userName={reply.userName}
               photoURL={reply.photoURL}
               userUid={reply.userUid}
+              upvotes={reply.upvotes}
+              date={getDate(reply.date)}
               //setActiveComment={setActiveComment}
               // activeComment={activeComment}
               // updateComment={updateComment}

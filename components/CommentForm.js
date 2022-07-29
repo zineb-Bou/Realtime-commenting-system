@@ -3,6 +3,7 @@ import { useAuth } from '../lib/auth';
 import Avatar from './Avatar';
 import { addComment } from '../lib/firestore';
 import { mutate } from 'swr';
+import { serverTimestamp } from '@firebase/firestore';
 
 export default function CommentForm({ isReplying }) {
   const auth = useAuth();
@@ -15,6 +16,8 @@ export default function CommentForm({ isReplying }) {
       userUid: auth.user.uid,
       photoURL: auth.user.photoURL,
       userName: auth.user.name,
+      upvotes: 0,
+      date: serverTimestamp(),
     };
     addComment(newComment);
     mutate(
@@ -26,8 +29,7 @@ export default function CommentForm({ isReplying }) {
     );
     reset();
   };
-  // upvotes: 0,
-  // date: new Date().toISOString(),
+
   return (
     <form
       className={`flex flex-row  items-start justify-center gap-4 rounded-lg bg-white py-8 px-4  ${

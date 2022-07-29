@@ -1,9 +1,7 @@
 import fetcher from '../utils/fetcher';
-import useSWR, { useSWRConfig } from 'swr';
+import useSWR from 'swr';
 import Comment from '../components/comment';
-import { getAllComments, getAllReplies } from '../lib/firestore';
-import { useState } from 'react';
-
+import getDate from '../utils/timeStamp';
 // .sort(
 //   (a, b) =>
 //     new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()
@@ -12,14 +10,11 @@ import { useState } from 'react';
 export default function CommentList() {
   const { data } = useSWR('/api/comments', fetcher);
   // If this it's a  child component, we apply diff style. This is useful to offset child comments from the parent and make a hierachy effect
-  //   const [child, setChild] = useState(false);
-  const getReplies = (data, commentUid) => {
-    return data.filter((comment) => comment.parentUid === commentUid);
-  };
+  const getReplies = (data, commentUid) =>
+    data.filter((comment) => comment.parentUid === commentUid);
 
-  if (!data) {
-    return <div>Loading...</div>;
-  }
+  if (!data) <div>Loading...</div>;
+
   if (data) {
     return (
       <>
@@ -32,6 +27,9 @@ export default function CommentList() {
               userName={commentList.userName}
               photoURL={commentList.photoURL}
               userUid={commentList.userUid}
+              upvotes={commentList.upvotes}
+              date={getDate(commentList.date)}
+              // date={commentList.date.getTime()}
             />
           );
         })}
