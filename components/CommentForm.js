@@ -3,47 +3,48 @@ import { useAuth } from '../lib/auth';
 import Avatar from './Avatar';
 import { addComment } from '../lib/firestore';
 import { mutate } from 'swr';
-import { useState } from 'react';
 
-export default function CommentForm() {
+export default function CommentForm({ isReplying }) {
   const auth = useAuth();
-  const { register, handleSubmit, watch, reset } = useForm();
-
-  const [reply, setReply] = useState(false); // This state will manage the reply form
+  const { register, handleSubmit, reset } = useForm();
 
   const onSubmit = (data) => {
-    addComment({
-      ...data,
-      uid: auth.user.uid,
+    const newComment = {
+      commentText: data.commentText,
+      parentUid: null,
+      userUid: auth.user.uid,
+      photoURL: auth.user.photoURL,
       userName: auth.user.name,
-      upvotes: 0,
-      date: new Date().toISOString(),
-    });
+    };
+    addComment(newComment);
+    mutate(
+      '/api/comments',
+      async (data) => {
+        return [...data, newComment];
+      },
+      false
+    );
     reset();
   };
-  // mutate(
-  //   ['/api/comments', auth.user.token],
-  //   async (data) => ({
-  //     sites: [{ id, ...newSite }, ...data.sites],
-  //   }),
-  //   false
-  // );
+  // upvotes: 0,
+  // date: new Date().toISOString(),
   return (
     <form
-      className="flex flex-row w-full gap-4 pw-12 py-8 px-4 bg-white rounded-lg items-start justify-center"
+      className={`flex flex-row  items-start justify-center gap-4 rounded-lg bg-white py-8 px-4  ${
+        isReplying ? 'ml-24' : ''
+      } `}
       onSubmit={handleSubmit(onSubmit)}
     >
       {/* register your input into the hook by invoking the "register" function */}
       {/* <input defaultValue="Add comment" {...register('Add comment')} /> */}
       {auth.user ? <Avatar src={auth.user.photoURL} /> : ''}
       <textarea
-        className={`py-8 px-4 w-9/12  resize-none text-black bg-white rounded-lg border border-2 border-LightGray ${
+        className={`w-9/12 resize-none rounded-lg  border border-2 border-LightGray bg-white p-4 text-black ${
           auth.user
-            ? 'focus:outline-HanBlue cursor-pointer '
-            : 'focus:outline-0  cursor-not-allowed'
+            ? 'cursor-pointer focus:outline-HanBlue '
+            : 'cursor-not-allowed  focus:outline-0'
         } `}
         rows="2,5 "
-        maxLength="300"
         placeholder="Add comment ... "
         {...register('commentText', { required: true })}
         disabled={!auth.user}
@@ -53,9 +54,9 @@ export default function CommentForm() {
       <button
         className={` ${
           auth.user
-            ? 'bg-Liberty cursor-pointer'
-            : 'bg-LavenderBlue cursor-not-allowed'
-        } font-medium px-8 py-3 rounded-lg text-white hover:bg-#ecbcfd`}
+            ? 'cursor-pointer bg-Liberty'
+            : 'cursor-not-allowed bg-LavenderBlue'
+        } hover:bg-#ecbcfd rounded-lg px-8 py-3 font-medium text-white`}
       >
         Send
       </button>

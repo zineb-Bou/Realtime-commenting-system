@@ -21,6 +21,10 @@ module.exports = {
       // => @media (min-width: 1280px) { ... }
     },
     extend: {
+      gridTemplateColumns: {
+        col3: 'repeat(3,auto)',
+        row2: 'repeat(auto,2fr)',
+      },
       spacing: {
         14: '62px',
       },

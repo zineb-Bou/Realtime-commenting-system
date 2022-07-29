@@ -1,9 +1,17 @@
+import Add from '../icons/add';
+import Minus from '../icons/minus';
 export default function Upvote() {
   return (
-    <div className="w-8 h-20 grid place-center bg-VeryLightGray  text-xs font-medium rounded-lg flex justify-center ">
-      <span>+</span>
-      <span>0</span>
-      <span>-</span>
+    <div className="col-start-1 col-end-2 row-start-1 row-end-3 flex  grid h-20 w-8 place-items-center justify-center rounded-lg bg-VeryLightGray text-xs font-medium ">
+      <button>
+        <Add className="fill-Liberty" />
+        <span className="sr-only">Add</span>
+      </button>
+      <span className="text-lg font-bold text-Liberty">0</span>
+      <button>
+        <Minus className="fill-Liberty" />
+        <span className="sr-only">Minus</span>
+      </button>
     </div>
   );
 }

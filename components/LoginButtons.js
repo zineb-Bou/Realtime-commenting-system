@@ -1,26 +1,27 @@
 import { useAuth } from '../lib/auth';
-import { Github, Google } from '../icons/brands';
+import Google from '../icons/google';
+import Github from '../icons/github';
 
 const LoginButtons = () => {
   const auth = useAuth();
   return (
-    <div className="flex flex-col justify-between w-5/6 max-w-md  xl:flex-row">
+    <div className="max-w-md flex w-5/6 flex-col justify-between  xl:flex-row">
       <button
-        className="bg-Black text-White p-2 rounded-lg shadow-lg max-w-btn my-2"
+        className="my-2 max-w-btn rounded-lg bg-Black p-2 text-White shadow-lg"
         onClick={(e) => {
           auth.signinWithGitHub();
         }}
       >
-        <Github className="inline-block mr-2" />
+        <Github className="mr-2 inline-block" />
         Continue with GitHub
       </button>
       <button
-        className="bg-White text-Black p-2 rounded-lg shadow-lg max-w-btn my-2"
+        className="my-2 max-w-btn rounded-lg bg-White p-2 text-Black shadow-lg"
         onClick={(e) => {
           auth.signinWithGoogle();
         }}
       >
-        <Google className="inline-block mr-2" />
+        <Google className="mr-2 inline-block" />
         Continue with Google
       </button>
     </div>

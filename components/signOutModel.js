@@ -4,10 +4,10 @@ export default function SignoutModel() {
   const auth = useAuth();
 
   return (
-    <div className="border border-LightGray rounded-lg flex flex-col absolute right-8 top-14 bg-white drop-shadow-lg">
-      <p className="text-bold p-2  font-bold border-b ">{auth.user.name}</p>
+    <div className="absolute right-8 top-14 flex flex-col rounded-lg border border-LightGray bg-white drop-shadow-lg">
+      <p className="text-bold border-b  p-2 font-bold ">{auth.user.name}</p>
       <button
-        className=" text-Black font-medium my-4 mx-2 text-left pl-2 py-2 rounded-lg hover:bg-VeryLightGray"
+        className=" my-4 mx-2 rounded-lg py-2 pl-2 text-left font-medium text-Black hover:bg-VeryLightGray"
         onClick={(e) => {
           auth.signout();
         }}
