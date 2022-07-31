@@ -7,6 +7,8 @@ import { useAuth } from '../lib/auth';
 import EditBtn from './editBtn';
 import DeleteBtn from './deleteBtn';
 import getDate from '../utils/timeStamp';
+import useModal from '../utils/useModal';
+import DeleteModal from './deleteModal';
 
 export default function Comment({
   key,
@@ -21,6 +23,7 @@ export default function Comment({
   const auth = useAuth();
   const [isReplying, setReply] = useState(false); // This state will manage the reply form
   const CommentForm = dynamic(() => import('./CommentForm')); // No need to import this component if the user won't click on "Reply"
+  const { isVisible, toggleModal } = useModal(); // This state will manage the delete modal
 
   return (
     <div className="flex flex-col gap-y-3  ">
@@ -40,7 +43,7 @@ export default function Comment({
         {auth.user ? (
           auth.user.uid === userUid ? (
             <div className="flex flex-row gap-x-5">
-              <DeleteBtn />
+              <DeleteBtn handleOnClick={toggleModal} />
               <EditBtn />
             </div>
           ) : (
@@ -75,6 +78,7 @@ export default function Comment({
           ))}
         </div>
       )}
+      <DeleteModal isVisible={isVisible} hideModal={toggleModal} />
     </div>
   );
 }

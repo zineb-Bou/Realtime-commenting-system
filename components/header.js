@@ -31,11 +31,11 @@ export default function Header() {
           </span>
         </h1>
         <p className="my-2 font-medium text-GrayishBlue">
-          This site is one of my personal project, the design inspired by
-          frontend mentor. Building your own commenting system is it a bit
-          challenging, so I am using here couple of modern tools that helped me
-          to build this. Any contribution are welcomed. On the backside we have
-          moderation, we delete comment if we have spamming.
+          This site is one of my personal project. Building your own commenting
+          system is it a bit challenging, so I am using here couple of modern
+          tools that helped me to build this interactive commenting systeme. Its
+          the easiest way to add comments or reviews to your static site. Try it
+          out by leaving a comment below. Any contribution are welcomed.
         </p>
         {!auth.user ? <LoginButtons /> : ''}
         <div className="mt-2 flex w-1/2 flex-row items-center justify-between p-2">
