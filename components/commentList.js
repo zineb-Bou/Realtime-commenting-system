@@ -1,6 +1,6 @@
+import Comment from './comment';
 import fetcher from '../utils/fetcher';
 import useSWR from 'swr';
-import Comment from '../components/comment';
 import getDate from '../utils/timeStamp';
 
 export default function CommentList() {

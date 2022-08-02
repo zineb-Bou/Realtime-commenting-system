@@ -11,7 +11,7 @@ import { useAuth } from '../lib/auth';
 import { updateUpvote, deleteComment } from '../lib/firestore';
 import { useAsyncReference } from '../utils/useAsyncReference';
 import { mutate } from 'swr';
-import CommentForm from './commentForm';
+import CommentForm from './CommentForm';
 
 export default function Comment({
   id,
