@@ -2,10 +2,6 @@ import fetcher from '../utils/fetcher';
 import useSWR from 'swr';
 import Comment from '../components/comment';
 import getDate from '../utils/timeStamp';
-// .sort(
-//   (a, b) =>
-//     new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()
-// );
 
 export default function CommentList() {
   const { data } = useSWR('/api/comments', fetcher);
@@ -20,14 +16,15 @@ export default function CommentList() {
       <>
         {data.map((commentList) => {
           return (
+            // eslint-disable-next-line react/jsx-key
             <Comment
-              key={commentList.id}
+              id={commentList.id}
               replies={getReplies(data, commentList.id)}
               commentText={commentList.commentText}
               userName={commentList.userName}
               photoURL={commentList.photoURL}
               userUid={commentList.userUid}
-              upvotes={commentList.upvotes}
+              upvote={commentList.upvote}
               date={getDate(commentList.date)}
               // date={commentList.date.getTime()}
             />

@@ -1,6 +1,6 @@
 import { createPortal } from 'react-dom';
 
-const DeleteModal = ({ isVisible, hideModal }) => {
+const DeleteModal = ({ isVisible, hideModal, onDelete }) => {
   return isVisible
     ? createPortal(
         <div className="fade fixed top-0 left-0  grid h-full w-full  place-items-center bg-black bg-opacity-50 outline-none">
@@ -19,7 +19,7 @@ const DeleteModal = ({ isVisible, hideModal }) => {
               </button>
               <button
                 className="rounded-lg bg-SoftRed px-4 py-2 font-Rubik text-xs  uppercase tracking-widest	 text-white	"
-                onClick={hideModal}
+                onClick={onDelete}
               >
                 Yes, Delete
               </button>

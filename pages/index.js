@@ -1,6 +1,6 @@
 import { useAuth } from '../lib/auth';
 import Header from '../components/header';
-import CommentForm from '../components/CommentForm';
+import CommentForm from '../components/commentForm';
 import CommentList from '../components/commentList';
 
 export default function Home() {
