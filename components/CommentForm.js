@@ -3,21 +3,19 @@ import { useForm } from 'react-hook-form';
 import { useAuth } from '../lib/auth';
 import { addComment } from '../lib/firestore';
 import { mutate } from 'swr';
-import { serverTimestamp } from '@firebase/firestore';
 
-export default function CommentForm({ isReplying, parentId, handleReply }) {
+export default function CommentForm({ handleReply, parentId }) {
   const auth = useAuth();
   const { register, handleSubmit, reset } = useForm();
-
   const onSubmit = (data) => {
     const newComment = {
       commentText: data.commentText,
-      parentUid: isReplying ? parentId : null,
+      parentUid: parentId,
       userUid: auth.user.uid,
       photoURL: auth.user.photoURL,
       userName: auth.user.name,
       upvote: 0,
-      date: serverTimestamp(),
+      date: new Date().toLocaleString().replace(',', ''),
     };
     addComment(newComment);
     mutate(
@@ -29,6 +27,7 @@ export default function CommentForm({ isReplying, parentId, handleReply }) {
     );
     reset();
     handleReply();
+    //(isReplying ? handleReply : () => {})();
   };
 
   return (

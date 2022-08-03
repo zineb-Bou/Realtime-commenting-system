@@ -12,6 +12,7 @@ import { updateUpvote, deleteComment } from '../lib/firestore';
 import { useAsyncReference } from '../utils/useAsyncReference';
 import { mutate } from 'swr';
 import CommentForm from './CommentForm';
+import CommentEdit from './commentEdit';
 
 export default function Comment({
   id,
@@ -32,9 +33,12 @@ export default function Comment({
   };
   // This state will manage the delete modal
   const { isVisible, toggleModal } = useModal();
+  // This state will manage the Edit
+  const [isEditing, setEdit] = useState(false);
   // This state will manage the upvote
   const [state, setState] = useState(upvote);
   const [ref, updateState] = useAsyncReference(upvote);
+
   const handleUpvote = () => {
     setState(state + 1);
     updateState(state + 1);
@@ -47,62 +51,67 @@ export default function Comment({
     }
     updateUpvote({ id, upvote: ref.current });
   };
-
   return (
     <div key={id} className="flex flex-col gap-y-3  ">
-      <div className="pw-12  grid h-max w-full grid-cols-[auto_minmax(0,1fr)_auto] grid-rows-[auto_1fr] gap-5 rounded-lg bg-white py-6 px-4">
-        <Upvote
-          state={state}
-          handleUpvote={handleUpvote}
-          handleDownvote={handleDownvote}
+      {/* the comment text section */}
+      {isEditing ? (
+        <CommentEdit
+          id={id}
+          commentText={commentText}
+          handleIsEditing={() => setEdit(!isEditing)}
         />
-        <div className="flex items-center gap-x-2  ">
-          <Avatar src={photoURL} />
-          <p className="text-sm font-bold text-DarkBlue">{userName}</p>
-          <p className="text-sm font-semibold text-SlateGray">{date}</p>
-        </div>
-        <p className="col-start-2 col-end-3 row-start-2 row-end-3 ">
-          {commentText}
-        </p>
-        {auth.user ? (
-          auth.user.uid === userUid ? (
-            <div className="flex flex-row gap-x-5">
-              <DeleteBtn handleOnClick={toggleModal} />
-              <EditBtn />
-            </div>
+      ) : (
+        <div className="pw-12  grid h-max w-full grid-cols-[auto_minmax(0,1fr)_auto] grid-rows-[auto_1fr] gap-5 rounded-lg bg-white py-6 px-4">
+          <Upvote
+            state={state}
+            handleUpvote={handleUpvote}
+            handleDownvote={handleDownvote}
+          />
+          <div className="flex items-center gap-x-2  ">
+            <Avatar src={photoURL} />
+            <p className="text-sm font-bold text-DarkBlue">{userName}</p>
+            <p className="text-sm font-semibold text-SlateGray">{date}</p>
+          </div>
+          <p className="col-start-2 col-end-3 row-start-2 row-end-3 ">
+            {commentText}
+          </p>
+          {auth.user ? (
+            auth.user.uid === userUid ? (
+              <div className="flex flex-row gap-x-5">
+                <DeleteBtn handleOnClick={toggleModal} />
+                <EditBtn handleOnClick={() => setEdit(!isEditing)} />
+              </div>
+            ) : (
+              <ReplyBtn handleOnClick={handleReply} />
+            )
           ) : (
-            <ReplyBtn handleOnClick={handleReply} />
-          )
-        ) : (
-          ''
-        )}
-      </div>
-      {replies.length > 0 && (
-        <div className="relative ml-24 flex flex-col gap-y-3">
-          <span className=" absolute -left-12 block h-full w-0.5 rounded-full bg-LightGray"></span>
-          {replies.map((reply) => (
-            // eslint-disable-next-line react/jsx-key
-            <Comment
-              id={reply.id}
-              commentText={reply.commentText}
-              replies={[]}
-              userName={reply.userName}
-              photoURL={reply.photoURL}
-              userUid={reply.userUid}
-              upvote={reply.upvote}
-              date={getDate(reply.date)}
-            />
-          ))}
-          {isReplying && (
-            <CommentForm
-              isReplying={isReplying}
-              parentId={id}
-              handleReply={handleReply}
-            />
+            ''
           )}
         </div>
       )}
-
+      {/* the reply section  */}
+      <div className="relative ml-24">
+        <span className=" absolute -left-12 block h-full w-0.5 rounded-full bg-LightGray"></span>
+        {replies.length > 0 && (
+          <div className="flex flex-col gap-y-3">
+            {replies.map((reply) => (
+              // eslint-disable-next-line react/jsx-key
+              <Comment
+                id={reply.id}
+                commentText={reply.commentText}
+                replies={[]}
+                parentUid={reply.parentUid}
+                userName={reply.userName}
+                photoURL={reply.photoURL}
+                userUid={reply.userUid}
+                upvote={reply.upvote}
+                date={reply.date}
+              />
+            ))}
+          </div>
+        )}
+        {isReplying && <CommentForm parentId={id} handleReply={handleReply} />}
+      </div>
       <DeleteModal
         isVisible={isVisible}
         hideModal={toggleModal}

@@ -15,7 +15,7 @@ export default function Home() {
       <div className="flex w-full justify-center py-12 ">
         <div className=" grid w-1/2 gap-y-3 bg-transparent lg:w-5/6">
           <CommentList />
-          <CommentForm />
+          <CommentForm parentId={null} handleReply={() => {}} />
         </div>
       </div>
       <footer className="pb-6  text-center font-bold text-GrayishBlue">
