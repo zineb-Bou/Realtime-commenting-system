@@ -7,8 +7,9 @@ import { editComment } from '../lib/firestore';
 export default function CommentEdit({ commentText, handleIsEditing, id }) {
   const auth = useAuth();
   const { register, handleSubmit } = useForm();
-  const onSubmit = ({ commentText }) => {
-    editComment({ commentText, id });
+  const onSubmit = async ({ commentText }) => {
+    await editComment({ commentText, id });
+    mutate('/api/comments');
     handleIsEditing();
   };
   return (
