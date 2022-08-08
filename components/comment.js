@@ -61,28 +61,32 @@ export default function Comment({
           handleIsEditing={() => setEdit(!isEditing)}
         />
       ) : (
-        <div className="pw-12  grid h-max w-full grid-cols-[auto_minmax(0,1fr)_auto] grid-rows-[auto_1fr] gap-5 rounded-lg bg-white py-6 px-4">
-          <Upvote
-            state={state}
-            handleUpvote={handleUpvote}
-            handleDownvote={handleDownvote}
-          />
-          <div className="flex items-center gap-x-2  ">
+        <div className="pw-12  grid h-max w-full grid-cols-[auto_minmax(0,1fr)_auto] grid-rows-[auto_1fr] gap-5 rounded-lg bg-white py-6 px-4 sm:grid-cols-[auto_minmax(0,1fr)] sm:grid-rows-[auto_1fr_auto]">
+          <div className="row-start-1 row-end-3 sm:col-start-1 sm:col-end-2 sm:row-start-3 sm:row-end-4">
+            <Upvote
+              state={state}
+              handleUpvote={handleUpvote}
+              handleDownvote={handleDownvote}
+            />
+          </div>
+          <div className="flex items-center gap-x-2  sm:col-start-1 sm:col-end-3 ">
             <Avatar src={photoURL} />
             <p className="text-sm font-bold text-DarkBlue">{userName}</p>
             <p className="text-sm font-semibold text-SlateGray">{date}</p>
           </div>
-          <p className="col-start-2 col-end-3 row-start-2 row-end-3 ">
+          <p className="roSw-end-3 col-start-2 col-end-3 row-start-2  sm:col-start-1 sm:col-end-3 sm:row-start-2 sm:row-end-3">
             {commentText}
           </p>
           {auth.user ? (
             auth.user.uid === userUid ? (
-              <div className="flex flex-row gap-x-5">
+              <div className="flex flex-row gap-x-5 sm:col-start-2 sm:col-end-3 sm:justify-self-end">
                 <DeleteBtn handleOnClick={toggleModal} />
                 <EditBtn handleOnClick={() => setEdit(!isEditing)} />
               </div>
             ) : (
-              <ReplyBtn handleOnClick={handleReply} />
+              <div className="sm:col-start-2 sm:col-end-3 sm:justify-self-end">
+                <ReplyBtn handleOnClick={handleReply} />
+              </div>
             )
           ) : (
             ''
@@ -90,8 +94,8 @@ export default function Comment({
         </div>
       )}
       {/* the reply section  */}
-      <div className="relative ml-24">
-        <span className=" absolute -left-12 block h-full w-0.5 rounded-full bg-LightGray"></span>
+      <div className="relative ml-24 sm:ml-8">
+        <span className=" absolute -left-12 block h-full w-0.5 rounded-full bg-LightGray sm:-left-6"></span>
         {replies.length > 0 && (
           <div className="flex flex-col gap-y-3">
             {replies.map((reply) => (

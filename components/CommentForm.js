@@ -33,13 +33,15 @@ export default function CommentForm({ handleReply, parentId }) {
   return (
     <form
       className={
-        'flex flex-row  items-start justify-center gap-4 rounded-lg bg-white py-8 px-4'
+        'grid grid-cols-[auto_minmax(0,1fr)_auto] grid-rows-[auto_1fr] items-start justify-center gap-4 rounded-lg bg-white py-8 px-4 '
       }
       onSubmit={handleSubmit(onSubmit)}
     >
-      {auth.user ? <Avatar src={auth.user.photoURL} /> : ''}
+      <div className=" sm:row-start-2 sm:row-end-2">
+        {auth.user ? <Avatar src={auth.user.photoURL} /> : ''}
+      </div>
       <textarea
-        className={`w-9/12 resize-none rounded-lg  border border-2 border-LightGray bg-white p-4 text-black ${
+        className={`w-full resize-none rounded-lg  border border-2 border-LightGray bg-white p-4 text-black sm:col-start-1 sm:col-end-4 ${
           auth.user
             ? 'cursor-pointer focus:outline-HanBlue '
             : 'cursor-not-allowed  focus:outline-0'
@@ -54,7 +56,7 @@ export default function CommentForm({ handleReply, parentId }) {
           auth.user
             ? 'cursor-pointer bg-Liberty'
             : 'cursor-not-allowed bg-LavenderBlue'
-        } hover:bg-#ecbcfd rounded-lg px-8 py-3 font-medium text-white`}
+        } hover:bg-#ecbcfd max-w-btn rounded-lg px-8 py-3 font-medium text-white sm:col-start-3 sm:col-end-4 sm:row-start-2 sm:row-end-3`}
       >
         Send
       </button>
