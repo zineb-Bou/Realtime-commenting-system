@@ -1,4 +1,5 @@
-# Interactive comenting section
+# Real-time commenting system in Nextjs
+
 Adding commentend it is really difficult for static sites, this is an easy way to add commenting section to a static
 people being able.
 this probably would an eay saas solution that your cann static comments to your site.
