@@ -35,10 +35,10 @@ export default function Header() {
           This site is one of my personal projects. Building your own commenting
           system could be a bit challenging, so I am using here couple of modern
           tools that helped me to build this interactive commenting system, it
-          is a new takeaway on how to build and deploy modern application with
-          JAM stack. Its the easiest way to add comments or reviews to your
-          static site. Try it out by leaving a comment below. Any contributions
-          are welcomed.
+          is a newtake on how to build and deploy modern application with JAM
+          stack. Its the easiest way to add comments or reviews to your static
+          site. Try it out by leaving a comment below. Any contributions are
+          welcomed.
           {/* <span>
             <a className=" inline flex gap-2 text-black">
               <Github className="fill-black" /> Github
