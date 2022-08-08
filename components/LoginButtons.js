@@ -12,7 +12,7 @@ const LoginButtons = () => {
           auth.signinWithGitHub();
         }}
       >
-        <Github className="mr-2 inline-block" />
+        <Github className="mr-2 inline-block fill-white" />
         Continue with GitHub
       </button>
       <button

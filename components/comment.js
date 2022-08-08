@@ -58,6 +58,7 @@ export default function Comment({
         <CommentEdit
           id={id}
           commentText={commentText}
+          userName={userName}
           handleIsEditing={() => setEdit(!isEditing)}
         />
       ) : (
@@ -95,7 +96,7 @@ export default function Comment({
       )}
       {/* the reply section  */}
       <div className="relative ml-24 sm:ml-8">
-        <span className=" absolute -left-12 block h-full w-0.5 rounded-full bg-LightGray sm:-left-6"></span>
+        <span className=" absolute -left-12 block h-full w-0.5 rounded-full bg-LightGray sm:-left-5"></span>
         {replies.length > 0 && (
           <div className="flex flex-col gap-y-3">
             {replies.map((reply) => (

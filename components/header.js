@@ -4,6 +4,7 @@ import Avatar from './Avatar';
 import SignoutModel from './signOutModel';
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
+import Github from '../icons/github';
 
 export default function Header() {
   const auth = useAuth();
@@ -31,15 +32,20 @@ export default function Header() {
           </span> */}
         </h1>
         <p className="my-2 font-medium text-GrayishBlue">
-          This site is one of my personal project. Building your own commenting
-          system is it a bit challenging, so I am using here couple of modern
-          tools that helped me to build this interactive commenting systeme. Its
-          the easiest way to add comments or reviews to your static site. Try it
-          out by leaving a comment below. Any contribution are welcomed. Deploy
-          with vercel, it is a new take on how to build and deploy modern
-          application with jam stack, and deploying this model application can
-          be difficult
+          This site is one of my personal projects. Building your own commenting
+          system could be a bit challenging, so I am using here couple of modern
+          tools that helped me to build this interactive commenting system, it
+          is a new takeaway on how to build and deploy modern application with
+          JAM stack. Its the easiest way to add comments or reviews to your
+          static site. Try it out by leaving a comment below. Any contributions
+          are welcomed.
+          {/* <span>
+            <a className=" inline flex gap-2 text-black">
+              <Github className="fill-black" /> Github
+            </a>
+          </span> */}
         </p>
+
         {!auth.user ? <LoginButtons /> : ''}
         <div className="mt-2 flex w-1/2 flex-row items-center justify-between p-2">
           <Image
