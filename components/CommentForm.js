@@ -27,7 +27,6 @@ export default function CommentForm({ handleReply, parentId }) {
     );
     reset();
     handleReply();
-    //(isReplying ? handleReply : () => {})();
   };
 
   return (

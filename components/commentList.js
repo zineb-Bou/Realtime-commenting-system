@@ -4,7 +4,7 @@ import useSWR from 'swr';
 
 export default function CommentList() {
   const { data } = useSWR('/api/comments', fetcher);
-  // If this it's a  child component, we apply diff style. This is useful to offset child comments from the parent and make a hierachy effect
+  //retrieve  replies of each comment
   const getReplies = (data, commentUid) =>
     data.filter((comment) => comment.parentUid === commentUid);
 

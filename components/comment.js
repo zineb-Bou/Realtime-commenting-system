@@ -6,13 +6,13 @@ import DeleteBtn from './deleteBtn';
 import getDate from '../utils/timeStamp';
 import useModal from '../utils/useModal';
 import DeleteModal from './deleteModal';
+import CommentForm from './CommentForm';
+import CommentEdit from './commentEdit';
 import { useState } from 'react';
 import { useAuth } from '../lib/auth';
 import { updateUpvote, deleteComment } from '../lib/firestore';
 import { useAsyncReference } from '../utils/useAsyncReference';
 import { mutate } from 'swr';
-import CommentForm from './CommentForm';
-import CommentEdit from './commentEdit';
 
 export default function Comment({
   id,
@@ -94,7 +94,9 @@ export default function Comment({
           )}
         </div>
       )}
-      {/* the reply section  */}
+      {/* the reply section  ---- Here we apply diff style. This is useful to
+      offset child comments from the parent and make a hierachy effect */}
+
       <div className="relative ml-24 sm:ml-8">
         <span className=" absolute -left-12 block h-full w-0.5 rounded-full bg-LightGray sm:-left-5"></span>
         {replies.length > 0 && (

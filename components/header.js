@@ -1,10 +1,9 @@
+import Image from 'next/image';
 import LoginButtons from './LoginButtons';
-import { useAuth } from '../lib/auth';
 import Avatar from './Avatar';
 import SignoutModel from './signOutModel';
+import { useAuth } from '../lib/auth';
 import { useState, useEffect } from 'react';
-import Image from 'next/image';
-import Github from '../icons/github';
 
 export default function Header() {
   const auth = useAuth();
